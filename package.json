@@ -1,0 +1,10 @@
+{
+  "name": "polymer-udemy-lecture-5-6",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@polymer/lit-element": "0.5.2",
+    "@polymer/paper-checkbox": "^3.0.0",
+    "@webcomponents/webcomponentsjs": "^2.0.2"
+  }
+}

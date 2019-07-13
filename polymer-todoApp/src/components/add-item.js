@@ -1,7 +1,6 @@
 import {LitElement, html} from '@polymer/lit-element'
 
 class AddItem extends LitElement{
-
     static get properties() {
         return {
             todoList: Array,
@@ -11,7 +10,8 @@ class AddItem extends LitElement{
 
     constructor(){
         super();
-        this.todoItem = '';
+        this.todoItem = ''; //F5 we going to lose this data.
+        //we need to use localstorage to store data
     }
 
     inputKeypress(e){
@@ -23,12 +23,30 @@ class AddItem extends LitElement{
         console.log(this.todoItem);
     }
 
+    onAddItem(){
+
+        let storedTodoList = JSON.parse(localStorage.getItem('todo-list'));
+        storedTodoList = storedTodoList === null ? [] : storedTodoList;
+
+        storedTodoList.push(
+            {
+                id: new Date().valueOf(),
+                item: this.todoItem,
+                done: false
+            }
+        )
+
+        localStorage.setItem('todo-list', JSON.stringify(storedTodoList));
+        this.todoItem = '';
+    }
+
     render(props){
         return html`
         <div>
-            <input value=${props.todoItem}
-            on-keyup="${(e) => this.inputKeypress(e)}" >
+            <input value=${this.todoItem} 
+                on-keyup="${(e) => this.inputKeypress(e)}" >
             </input>
+            <button @click="${this.onAddItem}"> Add Item </button>
         </div>
         
         `;

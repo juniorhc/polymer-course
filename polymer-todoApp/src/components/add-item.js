@@ -20,11 +20,9 @@ class AddItem extends LitElement {
         } else {
             this.todoItem = e.target.value;
         }
-        console.log(this.todoItem);
     }
 
     onAddItem() {
-
         if (this.todoItem.length > 0) {
             let storedTodoList = JSON.parse(localStorage.getItem('todo-list'));
             storedTodoList = storedTodoList === null ? [] : storedTodoList;
@@ -38,6 +36,15 @@ class AddItem extends LitElement {
             )
 
             localStorage.setItem('todo-list', JSON.stringify(storedTodoList));
+            this.dispatchEvent(new CustomEvent('addItem',
+                {
+                    bubbles: true,
+                    composed: true,
+                    detail:{
+                        todoList: storedTodoList
+                    }
+                }
+            ));
             this.todoItem = '';
         }
     }

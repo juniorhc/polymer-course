@@ -33,7 +33,6 @@ class TodoApp extends LitElement {
 
     render() {
         return html`
-        <p> Hello todo app </p>
         <add-item></add-item>
         <list-items .todoList=${this.todoList}> </list-items>
         `;
